@@ -48,9 +48,9 @@ impl TickArrayContainer<'_> {
     /// There is no need to convert AccountInfo to AccountLoad. (will expand RefMut lifetime to 'a)
     /// So it is necessary to check the owner
     pub fn load_data_mut<'a>(acc_info: &'a AccountInfo) -> Result<TickArrayContainerRefMut<'a>> {
-        if acc_info.owner != &crate::id() {
+        if *acc_info.owner != crate::id() {
             return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                .with_pubkeys((*acc_info.owner, crate::id())));
+            .with_pubkeys((*acc_info.owner, crate::id())));
         }
         if !acc_info.is_writable {
             return Err(ErrorCode::AccountNotMutable.into());
@@ -121,7 +121,7 @@ impl<'info> TickArrayContainer<'info> {
             ClmmErrorCode::TickAndSpacingNotMatch
         );
 
-        if tick_array_account_info.owner == &system_program::ID {
+        if *tick_array_account_info.owner == system_program::ID {
             let tick_array_state_loader = Self::create_dyn_tick_array_account(
                 payer,
                 tick_array_account_info,
@@ -135,9 +135,9 @@ impl<'info> TickArrayContainer<'info> {
         } else {
             // If the account is already initialized, just load it.
             // check account owner first
-            if tick_array_account_info.owner != &crate::id() {
+                    if *tick_array_account_info.owner != crate::id() {
                 return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                    .with_pubkeys((*tick_array_account_info.owner, crate::id())));
+                        .with_pubkeys((*tick_array_account_info.owner, crate::id())));
             }
 
             if Self::is_match_discriminator(
@@ -185,9 +185,9 @@ impl<'info> TickArrayContainer<'info> {
         access_tick_index: i32,
         tick_spacing: u16,
     ) -> Result<TickArrayContainer<'info>> {
-        if tick_array_account_info.owner != &crate::id() {
+        if *tick_array_account_info.owner != crate::id() {
             return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                .with_pubkeys((*tick_array_account_info.owner, crate::id())));
+            .with_pubkeys((*tick_array_account_info.owner, crate::id())));
         }
 
         if Self::is_match_discriminator(tick_array_account_info, TickArrayState::DISCRIMINATOR)? {
@@ -272,9 +272,9 @@ impl<'info> TickArrayContainer<'info> {
     pub fn try_from_without_check(
         tick_array_account_info: &AccountInfo<'info>,
     ) -> Result<TickArrayContainer<'info>> {
-        if tick_array_account_info.owner != &crate::id() {
+        if *tick_array_account_info.owner != crate::id() {
             return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                .with_pubkeys((*tick_array_account_info.owner, crate::id())));
+            .with_pubkeys((*tick_array_account_info.owner, crate::id())));
         }
 
         if Self::is_match_discriminator(tick_array_account_info, TickArrayState::DISCRIMINATOR)? {
@@ -440,7 +440,7 @@ impl<'info> TickArrayContainer<'info> {
         #[cfg(all(feature = "localnet", feature = "enable-log"))]
         msg!(
             "check_and_load_dyn_tick_array_account, tick_array_account: {}, tick_array_start_index: {}, access_tick_index:{}, tick_spacing: {}",
-            tick_array_account_info.key.to_string(),
+                    tick_array_account_info.key().to_string(),
             tick_array_start_index,
             access_tick_index,
             tick_spacing

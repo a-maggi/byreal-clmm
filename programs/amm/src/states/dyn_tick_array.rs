@@ -223,9 +223,9 @@ impl<'info> DynTickArrayLoader<'info> {
     /// Constructs a new `Loader` from a previously initialized account.
     #[inline(never)]
     pub fn try_from(acc_info: &AccountInfo<'info>) -> Result<Self> {
-        if acc_info.owner != &crate::id() {
+        if *acc_info.owner != crate::id() {
             return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                .with_pubkeys((*acc_info.owner, crate::id())));
+            .with_pubkeys((*acc_info.owner, crate::id())));
         }
         let data: &[u8] = &acc_info.try_borrow_data()?;
         if data.len() < DynTickArrayState::DISCRIMINATOR.len() {
@@ -243,9 +243,9 @@ impl<'info> DynTickArrayLoader<'info> {
     /// Constructs a new `Loader` from an uninitialized account.
     #[inline(never)]
     pub fn try_from_unchecked(acc_info: &AccountInfo<'info>) -> Result<Self> {
-        if acc_info.owner != &crate::id() {
+        if *acc_info.owner != crate::id() {
             return Err(Error::from(ErrorCode::AccountOwnedByWrongProgram)
-                .with_pubkeys((*acc_info.owner, crate::id())));
+            .with_pubkeys((*acc_info.owner, crate::id())));
         }
         Ok(Self::new(acc_info.clone()))
     }

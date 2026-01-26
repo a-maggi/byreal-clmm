@@ -275,7 +275,6 @@ pub mod tick_array_bitmap_extension_test {
             param.data.as_mut_slice(),
             &param.owner,
             false,
-            0,
         )
     }
 

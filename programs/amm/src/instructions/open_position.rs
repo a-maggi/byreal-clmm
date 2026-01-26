@@ -717,7 +717,7 @@ fn mint_nft_and_remove_mint_authority<'info>(
     let pool_state = pool_state_loader.load()?;
     let seeds = pool_state.seeds();
 
-    let token_program_info = if position_nft_mint_info.owner == token_program.key {
+    let token_program_info = if *position_nft_mint_info.owner == token_program.key() {
         token_program.to_account_info()
     } else {
         token_program_2022.unwrap().to_account_info()
@@ -756,7 +756,7 @@ fn mint_nft_and_remove_mint_authority<'info>(
     // Mint the NFT
     token_2022::mint_to(
         CpiContext::new_with_signer(
-            token_program_info.to_account_info(),
+            token_program_info.key(),
             token_2022::MintTo {
                 mint: position_nft_mint_info.clone(),
                 to: position_nft_account.to_account_info(),
@@ -770,7 +770,7 @@ fn mint_nft_and_remove_mint_authority<'info>(
     // Disable minting
     token_2022::set_authority(
         CpiContext::new_with_signer(
-            token_program_info.to_account_info(),
+            token_program_info.key(),
             token_2022::SetAuthority {
                 current_authority: pool_state_loader.to_account_info(),
                 account_or_mint: position_nft_mint_info,
@@ -808,7 +808,7 @@ fn initialize_metadata_account<'info>(
 ) -> Result<()> {
     create_metadata_accounts_v3(
         CpiContext::new_with_signer(
-            metadata_program.to_account_info(),
+            metadata_program.key(),
             CreateMetadataAccountsV3 {
                 metadata: metadata_account.to_account_info(),
                 mint: position_nft_mint.to_account_info(),
@@ -869,7 +869,7 @@ pub fn initialize_token_metadata_extension<'info>(
     drop(mint_data);
 
     let cpi_context = CpiContext::new(
-        token_2022_program.to_account_info(),
+        token_2022_program.key(),
         Transfer {
             from: payer.to_account_info(),
             to: position_nft_mint.to_account_info(),
@@ -879,10 +879,10 @@ pub fn initialize_token_metadata_extension<'info>(
 
     solana_program::program::invoke_signed(
         &spl_token_metadata_interface::instruction::initialize(
-            token_2022_program.key,
-            position_nft_mint.key,
-            metadata_update_authority.key,
-            position_nft_mint.key,
+            &token_2022_program.key(),
+            &position_nft_mint.key(),
+            &metadata_update_authority.key(),
+            &position_nft_mint.key(),
             &mint_authority.key(),
             metadata.name,
             metadata.symbol,

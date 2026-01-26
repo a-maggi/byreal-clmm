@@ -22,11 +22,12 @@ localnet = []
 devnet = []
 paramset = []
 idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+test-utils = []
 
 [dependencies]
 anchor-lang = { git = "https://github.com/solana-foundation/anchor.git", features = ["init-if-needed"] }
 anchor-spl = { git = "https://github.com/solana-foundation/anchor.git", features = ["metadata", "memo"] }
-spl-token-2022 = { version = "8.0.1", features = ["no-entrypoint"] }
+spl-token-2022 = { version = "10.0.0", features = ["no-entrypoint"] }
 uint = { git = "https://github.com/raydium-io/parity-common", package = "uint" }
 bytemuck = { version = "1.19.0", features = ["derive", "min_const_generics"] }
 arrayref = { version = "0.3.6" }

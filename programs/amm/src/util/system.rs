@@ -15,7 +15,7 @@ pub fn create_or_allocate_account<'a>(
     #[cfg(all(feature = "localnet", feature = "enable-log"))]
     msg!(
         "create_or_allocate_account, target_account: {}, current_lamports: {}, cur_space:{}, target_space: {}",
-        target_account.key.to_string(),
+        target_account.key().to_string(),
         current_lamports,
         target_account.data_len(),
         space
@@ -27,7 +27,7 @@ pub fn create_or_allocate_account<'a>(
             from: payer,
             to: target_account.clone(),
         };
-        let cpi_context = CpiContext::new(system_program.clone(), cpi_accounts);
+        let cpi_context = CpiContext::new(system_program.key(), cpi_accounts);
         system_program::create_account(
             cpi_context.with_signer(&[siger_seed]),
             lamports,
@@ -44,13 +44,13 @@ pub fn create_or_allocate_account<'a>(
                 from: payer.to_account_info(),
                 to: target_account.clone(),
             };
-            let cpi_context = CpiContext::new(system_program.clone(), cpi_accounts);
+            let cpi_context = CpiContext::new(system_program.key(), cpi_accounts);
             system_program::transfer(cpi_context, required_lamports)?;
         }
         let cpi_accounts = system_program::Allocate {
             account_to_allocate: target_account.clone(),
         };
-        let cpi_context = CpiContext::new(system_program.clone(), cpi_accounts);
+        let cpi_context = CpiContext::new(system_program.key(), cpi_accounts);
         system_program::allocate(
             cpi_context.with_signer(&[siger_seed]),
             u64::try_from(space).unwrap(),
@@ -59,7 +59,7 @@ pub fn create_or_allocate_account<'a>(
         let cpi_accounts = system_program::Assign {
             account_to_assign: target_account.clone(),
         };
-        let cpi_context = CpiContext::new(system_program.clone(), cpi_accounts);
+        let cpi_context = CpiContext::new(system_program.key(), cpi_accounts);
         system_program::assign(cpi_context.with_signer(&[siger_seed]), program_id)?;
     }
     Ok(())
@@ -100,14 +100,14 @@ pub fn realloc_account_if_needed<'a>(
 
     if top_up_lamports > 0 {
         require_keys_eq!(
-            *system_program.key,
+            system_program.key(),
             system_program::ID,
             ClmmErrorCode::InvalidAccount
         );
 
         system_program::transfer(
             CpiContext::new(
-                system_program.clone(),
+                system_program.key(),
                 system_program::Transfer {
                     from: rent_payer.clone(),
                     to: target_account.clone(),

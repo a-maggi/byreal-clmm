@@ -154,7 +154,7 @@ pub fn open_position_with_token22_nft<'a, 'b, 'c: 'info, 'info>(
 
     // create user position nft account
     create(CpiContext::new(
-        ctx.accounts.associated_token_program.to_account_info(),
+        ctx.accounts.associated_token_program.key(),
         Create {
             payer: ctx.accounts.payer.to_account_info(),
             associated_token: ctx.accounts.position_nft_account.to_account_info(),

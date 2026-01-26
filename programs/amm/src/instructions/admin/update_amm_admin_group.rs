@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 use std::ops::DerefMut;
 
 #[derive(Accounts)]
-#[instruction(index: u16)]
+//#[instruction(index: u16)]
 pub struct UpdateAdminGroupAccounts<'info> {
     /// only super admin can create admin group
     #[account(
@@ -48,6 +48,8 @@ pub struct UpdateAdminGroupParams {
     /// normal action manager,
     /// such as create amm config, update amm config
     pub normal_manager: Option<Pubkey>,
+
+    pub index: u16,
 }
 
 pub fn update_amm_admin_group(

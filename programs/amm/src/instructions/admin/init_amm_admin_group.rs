@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 use std::ops::DerefMut;
 
 #[derive(Accounts)]
-#[instruction(index: u16)]
+//#[instruction(index: u16)]
 pub struct InitAdminGroupAccounts<'info> {
     /// only super admin can create admin group
     #[account(

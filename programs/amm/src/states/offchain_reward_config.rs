@@ -94,14 +94,14 @@ impl OffchainRewardConfig {
 
         if top_up_lamports > 0 {
             require_keys_eq!(
-                *system_program.key,
+                system_program.key(),
                 system_program::ID,
                 ErrorCode::InvalidAccount
             );
 
             system_program::transfer(
                 CpiContext::new(
-                    system_program,
+                    system_program.key(),
                     system_program::Transfer {
                         from: rent_payer,
                         to: reward_config,

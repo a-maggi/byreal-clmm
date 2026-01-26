@@ -20,5 +20,7 @@ pub use tick_array_bit_map::*;
 pub use tick_math::*;
 pub use unsafe_math::*;
 
+#[cfg(any(test, feature = "test-utils"))]
 pub mod test_account_utils;
+#[cfg(any(test, feature = "test-utils"))]
 pub use test_account_utils::*;

@@ -36,7 +36,8 @@ pub fn invoke_memo_instruction<'info>(
     memo_msg: &[u8],
     memo_program: AccountInfo<'info>,
 ) -> solana_program::entrypoint::ProgramResult {
-    let ix = spl_memo::build_memo(memo_msg, &Vec::new());
+    let memo_program_key = memo_program.key();
+    let ix = spl_memo::build_memo(&memo_program_key, memo_msg, &[]);
     let accounts = vec![memo_program];
     solana_program::program::invoke(&ix, &accounts[..])
 }
@@ -57,12 +58,12 @@ pub fn transfer_from_user_to_pool_vault<'info>(
     let from_token_info = from.to_account_info();
     match (mint, token_program_2022) {
         (Some(mint), Some(token_program_2022)) => {
-            if from_token_info.owner == token_program_2022.key {
+            if *from_token_info.owner == token_program_2022.key() {
                 token_program_info = token_program_2022.to_account_info()
             }
             token_2022::transfer_checked(
                 CpiContext::new(
-                    token_program_info,
+                    token_program_info.key(),
                     token_2022::TransferChecked {
                         from: from_token_info,
                         to: to_vault.to_account_info(),
@@ -76,7 +77,7 @@ pub fn transfer_from_user_to_pool_vault<'info>(
         }
         _ => token::transfer(
             CpiContext::new(
-                token_program_info,
+                token_program_info.key(),
                 token::Transfer {
                     from: from_token_info,
                     to: to_vault.to_account_info(),
@@ -104,12 +105,12 @@ pub fn transfer_from_pool_vault_to_user<'info>(
     let from_vault_info = from_vault.to_account_info();
     match (mint, token_program_2022) {
         (Some(mint), Some(token_program_2022)) => {
-            if from_vault_info.owner == token_program_2022.key {
+            if *from_vault_info.owner == token_program_2022.key() {
                 token_program_info = token_program_2022.to_account_info()
             }
             token_2022::transfer_checked(
                 CpiContext::new_with_signer(
-                    token_program_info,
+                    token_program_info.key(),
                     token_2022::TransferChecked {
                         from: from_vault_info,
                         to: to.to_account_info(),
@@ -124,7 +125,7 @@ pub fn transfer_from_pool_vault_to_user<'info>(
         }
         _ => token::transfer(
             CpiContext::new_with_signer(
-                token_program_info,
+                token_program_info.key(),
                 token::Transfer {
                     from: from_vault_info,
                     to: to.to_account_info(),
@@ -145,7 +146,7 @@ pub fn close_spl_account<'a, 'b, 'c, 'info>(
     signers_seeds: &[&[&[u8]]],
 ) -> Result<()> {
     token_2022::close_account(CpiContext::new_with_signer(
-        token_program.to_account_info(),
+        token_program.key(),
         token_2022::CloseAccount {
             account: close_account.to_account_info(),
             destination: destination.to_account_info(),
@@ -164,10 +165,9 @@ pub fn burn<'a, 'b, 'c, 'info>(
     amount: u64,
 ) -> Result<()> {
     let mint_info = mint.to_account_info();
-    let token_program_info: AccountInfo<'_> = token_program.to_account_info();
     token_2022::burn(
         CpiContext::new_with_signer(
-            token_program_info,
+            token_program.key(),
             token_2022::Burn {
                 mint: mint_info,
                 from: burn_account.to_account_info(),
@@ -323,7 +323,7 @@ pub fn create_position_nft_mint_with_extensions<'info>(
     // create mint account
     create_account(
         CpiContext::new(
-            system_program.to_account_info(),
+            system_program.key(),
             CreateAccount {
                 from: payer.to_account_info(),
                 to: position_nft_mint.to_account_info(),
@@ -331,7 +331,7 @@ pub fn create_position_nft_mint_with_extensions<'info>(
         ),
         lamports,
         space as u64,
-        token_2022_program.key,
+        &token_2022_program.key(),
     )?;
 
     // initialize token extensions
@@ -339,8 +339,8 @@ pub fn create_position_nft_mint_with_extensions<'info>(
         match e {
             ExtensionType::MetadataPointer => {
                 let ix = metadata_pointer::instruction::initialize(
-                    token_2022_program.key,
-                    position_nft_mint.key,
+                    &token_2022_program.key(),
+                    &position_nft_mint.key(),
                     None,
                     Some(position_nft_mint.key()),
                 )?;
@@ -354,9 +354,9 @@ pub fn create_position_nft_mint_with_extensions<'info>(
             }
             ExtensionType::MintCloseAuthority => {
                 let ix = spl_token_2022::instruction::initialize_mint_close_authority(
-                    token_2022_program.key,
-                    position_nft_mint.key,
-                    Some(mint_close_authority.key),
+                    &token_2022_program.key(),
+                    &position_nft_mint.key(),
+                    Some(&mint_close_authority.key()),
                 )?;
                 solana_program::program::invoke(
                     &ix,
@@ -373,15 +373,16 @@ pub fn create_position_nft_mint_with_extensions<'info>(
     }
 
     // initialize mint account
+    let mint_authority_key = mint_authority.key();
     initialize_mint2(
         CpiContext::new(
-            token_2022_program.to_account_info(),
+            token_2022_program.key(),
             InitializeMint2 {
                 mint: position_nft_mint.to_account_info(),
             },
         ),
         0,
-        &mint_authority.key(),
+        &mint_authority_key,
         None,
     )
 }
@@ -399,7 +400,7 @@ pub fn create_token_vault_account<'info>(
     // support both spl_token_program & token_program_2022
     let space = get_account_data_size(
         CpiContext::new(
-            token_2022_program.to_account_info(),
+            token_2022_program.key(),
             GetAccountDataSize {
                 mint: token_mint.to_account_info(),
             },
@@ -413,7 +414,7 @@ pub fn create_token_vault_account<'info>(
 
     // create account with or without lamports
     create_or_allocate_account(
-        token_2022_program.key,
+        &token_2022_program.key(),
         payer.to_account_info(),
         system_program.to_account_info(),
         token_account.to_account_info(),
@@ -424,7 +425,7 @@ pub fn create_token_vault_account<'info>(
     // Call initializeImmutableOwner
     if immutable_owner_required {
         token_2022::initialize_immutable_owner(CpiContext::new(
-            token_2022_program.to_account_info(),
+            token_2022_program.key(),
             InitializeImmutableOwner {
                 account: token_account.to_account_info(),
             },
@@ -433,7 +434,7 @@ pub fn create_token_vault_account<'info>(
 
     // Call initializeAccount3
     token_2022::initialize_account3(CpiContext::new(
-        token_2022_program.to_account_info(),
+        token_2022_program.key(),
         InitializeAccount3 {
             account: token_account.to_account_info(),
             mint: token_mint.to_account_info(),
