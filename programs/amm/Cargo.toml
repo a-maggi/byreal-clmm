@@ -23,6 +23,12 @@ devnet = []
 paramset = []
 idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
 test-utils = []
+# On-chain dynamic-fee oracle path (swap_v3_dyn + pyth). NOT buildable on this
+# fork's dep set: pyth 1.0.0 is compiled against crates-io anchor 0.31 /
+# solana-program 2.x, whose types cannot mix with the git anchor 0.32 /
+# solana 3 pins above. Enabling it requires reverting to upstream's crates-io
+# anchor pins. The fork's consumer (mev-bot) never executes swap_v3_dyn.
+dynamic-fee-oracle = ["dep:pyth-solana-receiver-sdk"]
 
 [dependencies]
 anchor-lang = { git = "https://github.com/solana-foundation/anchor.git", features = ["init-if-needed"] }
@@ -32,18 +38,10 @@ uint = { git = "https://github.com/raydium-io/parity-common", package = "uint" }
 bytemuck = { version = "1.19.0", features = ["derive", "min_const_generics"] }
 arrayref = { version = "0.3.6" }
 solana-security-txt = "1.1.1"
+# Pinned to match anchor 0.31.1
+pyth-solana-receiver-sdk = { version = "=1.0.0", optional = true }
 
 [dev-dependencies]
 quickcheck = "0.9"
 proptest = "1.0"
 rand = "0.8.5"
-
-[profile.release]
-lto = "fat"
-codegen-units = 1
-panic = "abort"
-overflow-checks = true
-[profile.release.build-override]
-opt-level = 3
-incremental = false
-codegen-units = 1
