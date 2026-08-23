@@ -92,9 +92,9 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-access-control"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
@@ -129,9 +129,9 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-account"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
@@ -162,9 +162,9 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-constant"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "quote",
  "syn 1.0.109",
 ]
@@ -194,9 +194,9 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-error"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "quote",
  "syn 1.0.109",
 ]
@@ -228,9 +228,9 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-event"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
@@ -273,10 +273,10 @@ dependencies = [
 [[package]]
 name = "anchor-attribute-program"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
  "anchor-lang-idl 0.1.2",
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "anyhow",
  "heck",
  "proc-macro2",
@@ -310,9 +310,9 @@ dependencies = [
 [[package]]
 name = "anchor-derive-accounts"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "quote",
  "syn 1.0.109",
 ]
@@ -346,9 +346,10 @@ dependencies = [
 [[package]]
 name = "anchor-derive-serde"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-syn 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "proc-macro-crate 3.4.0",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
@@ -379,7 +380,7 @@ dependencies = [
 [[package]]
 name = "anchor-derive-space"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -454,17 +455,17 @@ dependencies = [
 [[package]]
 name = "anchor-lang"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-attribute-access-control 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-attribute-account 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-attribute-constant 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-attribute-error 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-attribute-event 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-attribute-program 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-derive-accounts 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-derive-serde 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
- "anchor-derive-space 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-attribute-access-control 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-attribute-account 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-attribute-constant 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-attribute-error 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-attribute-event 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-attribute-program 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-derive-accounts 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-derive-serde 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
+ "anchor-derive-space 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "anchor-lang-idl 0.1.2",
  "base64 0.21.7",
  "bincode",
@@ -498,9 +499,9 @@ dependencies = [
 [[package]]
 name = "anchor-lang-idl"
 version = "0.1.2"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-lang-idl-spec 0.1.0 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-lang-idl-spec 0.1.0 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "anyhow",
  "heck",
  "regex",
@@ -536,7 +537,7 @@ dependencies = [
 [[package]]
 name = "anchor-lang-idl-spec"
 version = "0.1.0"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
  "anyhow",
  "serde",
@@ -545,9 +546,9 @@ dependencies = [
 [[package]]
 name = "anchor-spl"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
- "anchor-lang 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-lang 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "base64ct",
  "mpl-token-metadata",
  "solana-sysvar 3.0.0",
@@ -599,7 +600,7 @@ dependencies = [
 [[package]]
 name = "anchor-syn"
 version = "0.32.1"
-source = "git+https://github.com/solana-foundation/anchor.git#2cb7ababa7dba3ac269fd2e60cfa06793ad2b989"
+source = "git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db#2dd5c2473f7964e080f5fa3bc06aa445c07396db"
 dependencies = [
  "anyhow",
  "bs58",
@@ -828,7 +829,7 @@ dependencies = [
 name = "byreal-clmm"
 version = "0.1.0"
 dependencies = [
- "anchor-lang 0.32.1 (git+https://github.com/solana-foundation/anchor.git)",
+ "anchor-lang 0.32.1 (git+https://github.com/solana-foundation/anchor.git?rev=2dd5c2473f7964e080f5fa3bc06aa445c07396db)",
  "anchor-spl",
  "arrayref",
  "bytemuck",

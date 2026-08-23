@@ -31,8 +31,8 @@ test-utils = []
 dynamic-fee-oracle = ["dep:pyth-solana-receiver-sdk"]
 
 [dependencies]
-anchor-lang = { git = "https://github.com/solana-foundation/anchor.git", features = ["init-if-needed"] }
-anchor-spl = { git = "https://github.com/solana-foundation/anchor.git", features = ["metadata", "memo"] }
+anchor-lang = { git = "https://github.com/solana-foundation/anchor.git", rev = "2dd5c2473f7964e080f5fa3bc06aa445c07396db", features = ["init-if-needed"] }
+anchor-spl = { git = "https://github.com/solana-foundation/anchor.git", rev = "2dd5c2473f7964e080f5fa3bc06aa445c07396db", features = ["metadata", "memo"] }
 spl-token-2022 = { version = "10.0.0", features = ["no-entrypoint"] }
 uint = { git = "https://github.com/raydium-io/parity-common", package = "uint" }
 bytemuck = { version = "1.19.0", features = ["derive", "min_const_generics"] }
